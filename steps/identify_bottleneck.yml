@@ -1,0 +1,44 @@
+id: identify_bottleneck
+learningObjectives:
+  - Spot blocking requests that slow down your JS apps
+hints:
+  - tktk
+startFlow:
+  do:
+    - actionId: bot_message
+      params:
+        person: keen
+        messages:
+          - text: 'Hey! We noticed that it’s a little slower than we want to load the items and comments. Take a look at the `ItemFetcher.js` file and see if you can spot the issue.'
+            delay: 2000
+          - text: 'Once you’ve found it, please drop me a message here and let me know what you think the problem is.'
+            delay: 3500
+trigger:
+  type: user_message
+  params:
+    person: keen
+  flowNode:
+    if:
+      conditions:
+        - conditionId: text_match_regex
+          params:
+            text: '${userMessageText}'
+            regex: blocking|async|await|Promise|waterfall
+            flags: i
+      then:
+        do:
+          - actionId: bot_message
+            params:
+              person: keen
+              messages:
+                - text: Good catch!
+                  delay: 1300
+          - actionId: finish_step
+      else:
+        do:
+          - actionId: bot_message
+            params:
+              person: keen
+              messages:
+                - text: Try again! I'm sure you'll figure this out.
+                  delay: 2500

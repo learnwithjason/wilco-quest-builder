@@ -1,0 +1,53 @@
+id: parallelize_async_await_calls
+learningObjectives:
+  - TKTK
+hints:
+  - TKTK
+startFlow:
+  do:
+    - actionId: bot_message
+      params:
+        person: keen
+        messages:
+          - text: 'Now that we know where the bottleneck is, go ahead and fix the bug!'
+            delay: 1300
+          - text: 'Open a pull request with the fix.'
+            delay: 1400
+githubActions:
+  frontend:
+    testFile: 'parallelize.test.js'
+trigger:
+  type: github_pr_lifecycle_status
+  flowNode:
+    switch:
+      key: '${eventType}'
+      cases:
+        github_pr_workflow_complete_success:
+          if:
+            conditions:
+              - conditionId: github_is_file_modified
+                params:
+                  fileName: frontend/src/components/Item/utils/ItemFetcher.js
+            then:
+              do:
+                - actionId: bot_message
+                  params:
+                    person: keen
+                    messages:
+                      - text: 'This looks great! Just approved. Go ahead and merge.'
+                        delay: 1500
+                - actionId: github_pr_approve
+                  params:
+                    person: keen
+                    message: 'Nailed it! Excellent job @${user.githubuser}! You can now merge the PR.'
+            else:
+              do:
+                - actionId: bot_message
+                  params:
+                    person: keen
+                    messages:
+                      - text: "Umm, that doesn't look right. Try again?"
+                        delay: 1400
+        github_pr_merged:
+          do:
+            - actionId: finish_step
