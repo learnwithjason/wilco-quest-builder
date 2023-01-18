@@ -1,19 +1,14 @@
 id: parallelize_async_await
-title: Parallelize Async Await Calls
-description: 'TKTK add description'
-summary: 'TKTK add summary'
+title: "Promise.all to the rescue"
+description: "Are your async/await calls slowing your app without you even knowing? Having your async requests block execution is a classic performance pitfall. Learn how to identify when this happens and how you can use Promise.all to optimize your code to be more performant."
+summary: 'You learned to identify how async/await calls can block code execution and how you can use Promise.all to make those calls run in parallel for better performance.'
 level: intermediate
 steps:
   - identify_bottleneck
   - parallelize_async_await_calls
-# - funneldrop_analyze_data
-# - funneldrop_reproduce_locally
-# - funneldrop_fixing_bug_pr
-duration: 1.5
+duration: 0.5
 skills:
   - frontend
   - debugging
-  - observability
-  - communication
 questDependency: docker_localsetup
-slogan: It's time for...
+slogan: Unlock your full potential
