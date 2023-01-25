@@ -1,8 +1,9 @@
 id: parallelize_async_await_calls
 learningObjectives:
-  - TKTK
+  - Fix the bottleneck by converting the sequential execution of the async requests into a parallel one.
 hints:
-  - TKTK
+  - See if you can find a way to make both calls happen simultaneously instead of one after the other.
+  - I'd look into using Promise.all to solve the issue.
 startFlow:
   do:
     - actionId: bot_message

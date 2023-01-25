@@ -2,7 +2,7 @@ id: identify_bottleneck
 learningObjectives:
   - Spot blocking requests that slow down your JS apps
 hints:
-  - tktk
+  - See if you notice anything in the code that could be blocking the execution. Let me know what you think it is.
 startFlow:
   do:
     - actionId: bot_message
